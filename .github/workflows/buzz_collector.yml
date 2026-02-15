@@ -22,14 +22,14 @@ jobs:
           python-version: '3.11'
 
       - name: 依存関係をインストール
-        run: pip install -r requirements.txt
+        run: pip install -r buzz_collector/requirements.txt
 
       - name: バズ投稿を収集
-        run: python buzz_collector.py
+        run: python buzz_collector/buzz_collector.py
 
       - name: レポートをアーティファクトにアップロード
         uses: actions/upload-artifact@v4
         with:
           name: buzz-reports-${{ github.run_id }}
-          path: reports/buzz_report_*.txt
+          path: buzz_collector/reports/buzz_report_*.txt
           retention-days: 30

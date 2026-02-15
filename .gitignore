@@ -3,3 +3,4 @@ API/
 
 # ローカルで生成したレポート（GitHub Actions では Artifacts にアップロード）
 reports/
+buzz_collector/reports/
