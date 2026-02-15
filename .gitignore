@@ -1,0 +1,5 @@
+# API認証情報（機密）
+API/
+
+# ローカルで生成したレポート（GitHub Actions では Artifacts にアップロード）
+reports/

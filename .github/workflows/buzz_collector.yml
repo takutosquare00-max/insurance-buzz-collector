@@ -1,0 +1,35 @@
+name: タイ保険バズ投稿収集
+
+on:
+  schedule:
+    # 毎日 9:00 JST (0:00 UTC) に実行
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # 手動実行も可能
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 依存関係をインストール
+        run: pip install -r requirements.txt
+
+      - name: バズ投稿を収集
+        run: python buzz_collector.py
+
+      - name: レポートをアーティファクトにアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: buzz-reports-${{ github.run_id }}
+          path: reports/buzz_report_*.txt
+          retention-days: 30
